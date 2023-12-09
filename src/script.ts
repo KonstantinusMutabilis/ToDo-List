@@ -2,7 +2,7 @@ type Task = {
 
     title: string,
     context: string,
-    importend: boolean,
+    important: boolean,
     complited: boolean,
     creationDate: Date
 }
@@ -14,7 +14,7 @@ const container = document.querySelector<HTMLDivElement>("#container");
 const taskForm = document.querySelector("#task-form") as HTMLFormElement;
 const taskTitle = document.querySelector<HTMLInputElement>("#Task-title");
 const taskContext = document.querySelector<HTMLInputElement>("#Task-context");
-const taskImportant = document.querySelector("#Task-importent") as HTMLInputElement;
+const taskImportant = document.querySelector("#Task-important") as HTMLInputElement;
 const tasks: Task[] = loadTasks()
 
 
@@ -30,7 +30,7 @@ taskForm?.addEventListener("submit", e => {
 
         title: taskTitle.value,
         context: taskContext.value,
-        importend: taskImportant.checked,
+        important: taskImportant.checked,
         complited: false,
         creationDate: new Date()
     }
@@ -61,9 +61,9 @@ function addTaskListItem(task: Task) {
     const EditForm = document.querySelector("#Edit-Form") as HTMLFormElement;
     const EditTitle = document.querySelector("#Task-title-edit") as HTMLInputElement;
     const EditContext = document.querySelector("#task-context-edit") as HTMLInputElement;
-    const EditImportent = document.querySelector("#importent-edit") as HTMLInputElement;
+    const EditImportant = document.querySelector("#important-edit") as HTMLInputElement;
 
-    EditImportent.checked = task.importend
+    EditImportant.checked = task.important
 
     const card = document.createElement("div")
     card.classList.add('card', 'taskcard', 'text-start', 'w-50', 'mb-4')
@@ -74,8 +74,8 @@ function addTaskListItem(task: Task) {
     cardHeader.classList.add('card-header')
     card.appendChild(cardHeader)
 
-    function ifTaskImportent(task: Task) {
-        switch (task.importend) {
+    function ifTaskImportant(task: Task) {
+        switch (task.important) {
             case true: {
                 cardHeader.classList.add('bg-warning-subtle')
                 break;
@@ -234,7 +234,7 @@ function addTaskListItem(task: Task) {
             }
 
 
-            tasks[i].importend = EditImportent.checked
+            tasks[i].important = EditImportant.checked
 
 
 
@@ -242,7 +242,7 @@ function addTaskListItem(task: Task) {
 
 
             saveTasks()
-            ifTaskImportent(task)
+            ifTaskImportant(task)
 
             EditTitle.value = ""
             EditContext.value = ""
@@ -261,7 +261,7 @@ function addTaskListItem(task: Task) {
     container?.appendChild(card)
 
 
-    ifTaskImportent(task)
+    ifTaskImportant(task)
     ifDoneCheck(checkbox)
 
 

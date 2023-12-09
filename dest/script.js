@@ -5,7 +5,7 @@ const container = document.querySelector("#container");
 const taskForm = document.querySelector("#task-form");
 const taskTitle = document.querySelector("#Task-title");
 const taskContext = document.querySelector("#Task-context");
-const taskImportant = document.querySelector("#Task-importent");
+const taskImportant = document.querySelector("#Task-important");
 const tasks = loadTasks();
 tasks.forEach(addTaskListItem);
 taskForm === null || taskForm === void 0 ? void 0 : taskForm.addEventListener("submit", e => {
@@ -15,7 +15,7 @@ taskForm === null || taskForm === void 0 ? void 0 : taskForm.addEventListener("s
     const newTask = {
         title: taskTitle.value,
         context: taskContext.value,
-        importend: taskImportant.checked,
+        important: taskImportant.checked,
         complited: false,
         creationDate: new Date()
     };
@@ -30,15 +30,15 @@ function addTaskListItem(task) {
     const EditForm = document.querySelector("#Edit-Form");
     const EditTitle = document.querySelector("#Task-title-edit");
     const EditContext = document.querySelector("#task-context-edit");
-    const EditImportent = document.querySelector("#importent-edit");
-    EditImportent.checked = task.importend;
+    const EditImportant = document.querySelector("#important-edit");
+    EditImportant.checked = task.important;
     const card = document.createElement("div");
     card.classList.add('card', 'taskcard', 'text-start', 'w-50', 'mb-4');
     const cardHeader = document.createElement("div");
     cardHeader.classList.add('card-header');
     card.appendChild(cardHeader);
-    function ifTaskImportent(task) {
-        switch (task.importend) {
+    function ifTaskImportant(task) {
+        switch (task.important) {
             case true: {
                 cardHeader.classList.add('bg-warning-subtle');
                 break;
@@ -160,9 +160,9 @@ function addTaskListItem(task) {
             else {
                 tasks[i].context = EditContext.value;
             }
-            tasks[i].importend = EditImportent.checked;
+            tasks[i].important = EditImportant.checked;
             saveTasks();
-            ifTaskImportent(task);
+            ifTaskImportant(task);
             EditTitle.value = "";
             EditContext.value = "";
             location.reload();
@@ -171,7 +171,7 @@ function addTaskListItem(task) {
     DropdownMenu.appendChild(menuList1);
     DropdownMenu.appendChild(menuList2);
     container === null || container === void 0 ? void 0 : container.appendChild(card);
-    ifTaskImportent(task);
+    ifTaskImportant(task);
     ifDoneCheck(checkbox);
 }
 searchInput.addEventListener('input', elem => {
