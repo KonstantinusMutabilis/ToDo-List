@@ -78,13 +78,11 @@ function addTaskListItem(task) {
             case true: {
                 h.classList.add('text-decoration-line-through');
                 p.classList.add('text-decoration-line-through');
-                console.log("trueeeeeeee");
                 break;
             }
             case false: {
                 h.classList.remove('text-decoration-line-through');
                 p.classList.remove('text-decoration-line-through');
-                console.log("false");
                 break;
             }
         }
@@ -146,6 +144,8 @@ function addTaskListItem(task) {
     });
     item1.addEventListener("click", () => {
         let i = tasks.indexOf(task);
+        EditTitle.placeholder = tasks[i].title;
+        EditContext.placeholder = tasks[i].context;
         EditForm.addEventListener("submit", (el) => {
             el.preventDefault();
             if (EditTitle.value == null || EditTitle.value == "") {
@@ -166,6 +166,8 @@ function addTaskListItem(task) {
             EditTitle.value = "";
             EditContext.value = "";
             location.reload();
+            EditTitle.placeholder = "";
+            EditContext.placeholder = "";
         });
     });
     DropdownMenu.appendChild(menuList1);
@@ -179,7 +181,7 @@ searchInput.addEventListener('input', elem => {
     const taskcards = document.querySelectorAll(".taskcard");
     Array.from(taskcards).forEach(taskcard => {
         const isVisible = taskcard.querySelector(".card-title").innerHTML.includes(value) || taskcard.querySelector(".card-text").innerHTML.includes(value);
-        taskcard.classList.toggle("invisible", !isVisible);
+        taskcard.classList.toggle("d-none", !isVisible);
     });
 });
 function saveTasks() {

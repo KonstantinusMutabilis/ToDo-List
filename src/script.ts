@@ -126,13 +126,13 @@ function addTaskListItem(task: Task) {
             case true: {
                 h.classList.add('text-decoration-line-through')
                 p.classList.add('text-decoration-line-through')
-                console.log("trueeeeeeee")
+
                 break;
             }
             case false: {
                 h.classList.remove('text-decoration-line-through')
                 p.classList.remove('text-decoration-line-through')
-                console.log("false")
+
                 break;
             }
         }
@@ -213,6 +213,10 @@ function addTaskListItem(task: Task) {
     item1.addEventListener("click", () => {
         let i = tasks.indexOf(task)
 
+        EditTitle.placeholder = tasks[i].title
+
+        EditContext.placeholder = tasks[i].context
+
         EditForm.addEventListener("submit", (el) => {
 
             el.preventDefault()
@@ -248,6 +252,10 @@ function addTaskListItem(task: Task) {
             EditContext.value = ""
             location.reload()
 
+
+            EditTitle.placeholder = ""
+            EditContext.placeholder = ""
+
         })
 
     })
@@ -277,7 +285,7 @@ searchInput.addEventListener('input', elem => {
 
         const isVisible = (taskcard.querySelector(".card-title") as HTMLHeadingElement).innerHTML.includes(value) || (taskcard.querySelector(".card-text") as HTMLParagraphElement).innerHTML.includes(value)
 
-        taskcard.classList.toggle("invisible", !isVisible)
+        taskcard.classList.toggle("d-none", !isVisible)
 
     })
 
